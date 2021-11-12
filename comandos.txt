@@ -1,0 +1,198 @@
+Aula 1 Docker - Fabricio Veronez
+[
+    docker container run hello-world
+
+    # Listar
+    docker container ls { -a }
+
+    # Nome
+    docker container run --name meuSegundoContainer hello-world
+
+    # Modo Interativo
+    docker container run -ti ubuntu /bin/bash
+    {
+        apt-get update --yes
+        apt update -y
+    }
+
+    # Remover:
+    docker container rm < nome ou id do container>
+
+    #
+    docker container run nginx
+
+    # Modo daemon (fica rodando em segundo plano)
+    docker container run -d nginx
+
+    # Acessar o nginx:
+    docker container exec -ti <id / nome> /bin/bash
+
+    # Acessar porta do nginx / Binding de portas
+    docker container run -d -p <porta-local>:<porta-do-container> nginx
+    docker container run --name server -d -p 9090:80 nginx
+
+    # Criar Imagens
+    docker container run -ti ubuntu /bin/bash
+    apt update -y
+    apt install curl -y
+    => Necessário o Dockerfile!! Exemplo:
+            FROM ubuntu
+            RUN apt update
+            RUN apt install curl -y
+    docker image build -t <nome-image> <diretorio-criacao>
+    docker image build -t ubuntu-curl .
+
+    # Listar Imagens
+    docker image ls
+
+    # Teste Imagem criada
+    docker container run -ti ubuntu-curl /bin/bash
+
+    # Alterando o Dockerfile
+        FROM ubuntu
+        RUN apt update && apt install curl -y
+        RUN apt update && apt install vim -y
+    Aqui, o docker utilizou o cache uma vez que a imagem já foi utilizada uma vez, como adiciou a instalação 
+    do vim e buscar somente o vim. Detalhe importante, a ordem de execução das camadas for alterada o docker
+    vai executar sem o cache.
+
+    # History
+    docker image hystory < imagem >
+
+    # Problema do cache
+    Ao colocar a instrução " RUN apt update " em um Dockerfile, ele vai ser utilizado em cache em uma segunda
+    execução e ai não irá atualizar verdadeiramente o novo container. 
+
+    # Resolvendo esse problema
+    RUN apt update && apt install curl -y pois nesse caso ao adicionarmos uma nova camada SEMPRE irá executar o
+    "update" antes.
+
+    # Utilizando o Docker Registry
+    docker login
+
+    <name-space / repositorio : tag> ==> < conta-proprietario-image / nome-app-ou-microservico : versao-imagem-docker >
+    docker image build -t renatorv/ubuntu-curl:v1 .
+
+    # Subindo a image
+    docker push renatorv/ubuntu-curl:v1
+
+    # Usando ' tag '
+    docker tag renatorv/ubuntu-curl:v2 renatorv/ubuntu-curl:latest
+
+    # Remover image
+    docker image rm < id >
+    docker image rm -f < id >
+    docker image prune
+
+    #
+    docker container run --name meuUbuntu -ti renatorv/ubuntu-curl:v1 /bin/bash
+
+    # Opções do Dockerfile:
+        FROM       => inicia o build de uma imagem a partir de uma imagem base
+        RUN        => executa um comando
+        LABEL      => adiciona metadados a imagem
+        CMD        => define o comando e/ou os parâmetros padrão
+        EXPOSE     => define que o container precisa expor a porta em questão
+        ENV        => define variáveis de ambiente
+        ADD        => copia arquivos ou diretórios ou arquivos remotos e adiciona ao sistema de arquivos da imagem
+        COPY       => copia arquivos ou diretórios e adiciona ao sistema de arquivos da imagem
+        ENTRYPOINT => ajuda você a configurar um container que pode ser executado como um executável
+        VOLUME     => define volumes que devem ser definidos
+        WORKDIR    => define o seu diretorio corrente
+
+    1 hora e 31 minutos
+]
+
+====================================================================================================================
+
+https://nosqlbooster.com/downloads
+
+http://www.ramosconsultoria.net/painel/knowledgebase/10/Como-instalar-Interface-Grafica-Gnome-no-Ubuntu-Server.html
+
+docker container run --name meucontainer hello-world
+
+{
+    docker container run -ti ubuntu
+    no bash ps -ef
+    cat /etc/issue -> ver qual sistema
+    CTRL + D / logout / exit -> mata e sai do container
+}
+
+{
+    docker container run -ti centos
+    cat /etc/redhat-release
+    yum update
+    CTRL + P + Q ::  => não funcionou no terminal do VSCode
+    docker container attach < nome_container ou id >
+}
+
+{
+    docker container run -ti nginx => o nginx não tem bash, o que rodando é a instancia do web server
+    docker container run -d nginx => roda como daemon
+    docker container exec -ti <id> <comando>
+    assim:
+    docker container run -d nginx
+    docker container exec -ti 6e93a7f85bcb ls /
+    docker container exec -ti 6e93a7f85bcb bash
+    CTRL + D => sai mais não mata o container, pois o principal processo não é o bash mais o nginx, por isso ele continua em execução
+}
+
+{
+    docker container stop < id > => para parar o container
+    docker container start < id > => para startar o container
+    docker container restart < id > => para restartar o container
+
+    docker container pause < id > => para pausar o container
+    docker container unpause < id > => para pausar o container
+
+    docker container inspect < id > => detalhes do container
+}
+
+docker container run --name dart -it dart /bin/bash
+[
+    apt update
+    apt install nano
+    CTRL + A -> Ir para o início da linha.
+    CTRL + E -> 	Ir para o fim da linha.
+    CTRL + Y -> Rolar a página para baixo.
+    CTRL + V -> Rolar a página para cima.
+    CTRL + W -> Um dos comandos mais úteis. É usado para pesquisar uma frase especificada no seu texto. 
+                Ele funciona muito como o costume CTRL + F comando em outros aplicativos e plataformas. 
+                Para procurar a mesma frase novamente pressione ALT + W.
+]
+
+docker ps < -a >
+
+docker container rm < nome_container ou id >
+
+docker container run --name meucontainer --rm hello-world
+
+OBSERVAÇÃO: para remover um container que estiver em execução:
+docker container rm -f < id >
+
+docker container run -it ubuntu /bin/bash
+-> apt update
+-> apt install curl
+-> exit
+
+REINICIAR UM CONTAINER:
+
+docker container restart < nome_container ou id >
+
+docker container exec -it < nome_container ou id > /bin/bash
+
+
+EXECUTANDO CONTINUAMENTE:
+
+docker container run --name nginx -d nginx
+
+PORT BINDING: cria um vinculo entre a porta local e a porta do container
+docker container run -d -p < porta local > : < porta do container em execução >
+docker container run -d -p 9090:80 nginx
+
+
+MONGODB EM CONTAINER:
+
+docker container run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
+
+1 hora
