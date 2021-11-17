@@ -1,0 +1,54 @@
+============================================================
+=                                                          =  
+=   https://www.youtube.com/watch?v=yb2udL9GG2U&t=2796s    =
+=                                                          =
+=   Docker e Docker Compose do zero ao Deploy              =
+=                                                          =
+============================================================
+
+Como os containers funcionam?
+
+NAMESPACE: isolam os processos do container. Assim os processos do 
+           container não tem acesso aos processos da máquina host.
+           Isso ocorre para que o processo do container não afete 
+           os processos do host.
+
+CGROUPS: controla recursos do container. Determina o limite de uso
+         recursos que o container poderá usar. Para que o container
+         não possa utilizar todos os recursos do host, gerando assim
+         um crash no sistema.
+
+FILE SYSTEM: OFS ( Overlay File System ) trabalha em camadas, ou seja,
+             o docker é capaz de reaproveitar pedaços de código de outros
+             containers/imagens e isso é que torna o docker capaz de usar
+             muito pouco recursos de espaço / rede e etc.
+
+Todo container é baseado em uma imagem. Analogia com a OO:     image == classe
+                                                           container == objeto
+
+# DOKCERFILE
+
+FROM: ImageName
+RUN: Comandos, ex.: apt-get install
+EXPOSE: 8000
+
+## UMA IMAGEM É IMUTÁVEL !!!!!
+
+docker container run hello-world
+
+docker container run -p <porta-host(local)>:<porta-container> nginx
+docker container run -p 8080:80 nginx
+docker container run -d -p 8080:80 nginx (-d dettach)
+
+O comando run sempre cria um novo container!!!!
+
+docker container run --name nginx -d -p 8090:80 nginx
+
+# Executa um comando dentro do container
+docker container exec nginx ls /var
+
+docker container exec -ti nginx bash
+apt update
+apt install -y nano
+
+1 hora 4 minutos
