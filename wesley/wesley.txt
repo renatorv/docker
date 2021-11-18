@@ -48,7 +48,26 @@ docker container run --name nginx -d -p 8090:80 nginx
 docker container exec nginx ls /var
 
 docker container exec -ti nginx bash
-apt update
-apt install -y nano
+apt-get update
+apt-get install -y nano
 
-1 hora 4 minutos
+# IMAGENS
+docker images
+
+docker rmi < image >
+
+# Dockerfile
+docker build -t renatorv/imggo-docker .
+
+docker push renatorv/imggo-docker:latest
+
+# Docker Compose => gerencia vários containers Docker.
+
+docker-compose up
+CTRL+C para stopar
+
+docker-compose up -d
+
+
+
+google cloud run
