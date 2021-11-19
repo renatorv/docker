@@ -1,0 +1,28 @@
+CONTAINER E DOCKER SIMPLIFICADOS:
+
+docker container run --name meucontainer hello-world
+
+docker container rm -f < id ou nome >
+
+docker container run --name meucontainer --rm hello-world
+
+
+# MODO INTERATIVO:
+
+docker container run --name teste -ti ubuntu /bin/bash
+
+
+# EXECUTANDO CONTINUAMENTE:
+
+docker container run nginx  ==> terminal fica preso
+
+docker container run -d nginx
+
+docker container run -d -p 7777:80 --name webserver nginx
+
+
+# MONGODB EM CONTAINER
+
+docker container run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd --name mongodb mongo
+
+1 hora
