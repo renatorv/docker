@@ -25,4 +25,11 @@ docker container run -d -p 7777:80 --name webserver nginx
 
 docker container run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd --name mongodb mongo
 
-1 hora
+# COMANDOS DE TROUBLESHOOTING ( resolução de problemas nos containers )
+
+docker container inspect < id >
+
+docker container exec < id > => executa algum comando no container
+docker container exec -ti < id > /bin/bash
+
+1:07
