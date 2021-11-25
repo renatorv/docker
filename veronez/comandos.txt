@@ -32,4 +32,49 @@ docker container inspect < id >
 docker container exec < id > => executa algum comando no container
 docker container exec -ti < id > /bin/bash
 
-1:07
+docker container stop < id >
+docker container start < id >
+docker container rm < id > [ -f caso o container esteja em execução ]
+
+docker container logs < id >
+docker container logs -n < nr linhas > < id >
+docker container logs -n < nr linhas > < id >
+docker container logs -f < id > [ -f fica monitorando os logs ]
+docker container logs -t < id > [ -t mostra data e hora ]
+
+
+# INTRODUÇÃO A IMAGENS DOCKER
+
+Imagem: é um template para se criar um container. Toda imagem é criada em camadas, 
+utilizando a tecnologia "Overlay File System" do Linux, onde é possível fazer combinações
+de camadas de File System de somente leitura onde é inserido varios elementos em cada camada
+gerando assim a imagem. 
+
+Container: é uma inserção de leitura e escrita emcima da imagem.
+
+Como construir sua imagem docker:
+1 - Docker Commit: cria a imagem baseado em um container existente, onde é inserido as nossas instruções
+                   
+2 - Dockerfile: o container não é criado no processo de execução, mais sim segue uma receita que contém
+                todos os passos para criação da imagem.
+
+Por boas praticas deve-se utilizar o Dockerfile. 
+
+
+Docker Commit:
+docker container run -ti ubuntu /bin/bash
+    apt update
+    apt install -y curl
+    exit
+    #docker container start id
+    #docker container exec -ti cd88ba2cbdb7 /bin/bash
+    docker commit id <nome>
+    docker image ls
+    Após o processo cria-se a imagem
+
+
+Dockerfile:
+Cria-se o arquivo Dockerfile e depois executa-se o comando:
+docker image build -t ubuntu-curl-file .
+
+1:28
