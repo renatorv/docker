@@ -1,0 +1,30 @@
+docker container run hello-world
+
+docker container run -ti ubuntu bash
+{ 
+    cat /proc/cpuinfo 
+    uname -a
+}
+
+docker container run --name nginx nginx
+
+docker container run --name nginx -p 8080:80 nginx
+
+docker container exec -ti nginx bash
+{
+    apt update
+    apt install vim
+}
+
+docker container run --rm --name nginx -p 8080:80 nginx [ --rm remove o container quando ele é stopado ]
+
+
+*** O CONTAINER É IMUTÁVEL, OU SEJA, SE ELE MORRER E ELE FOR CRIADO NOVAMENTE SEMPRE SERÁ CRIADO IGUAL A SUA IMAGEM!!!!
+
+
+VOLUMES: é uma forma de compartilhar uma pasta do 'meu computador local' com uma pasta que está lá no container.
+
+docker container run --rm --name nginx -p 8080:80 -v ${pwd}:/usr/share/nginx/html nginx
+
+https://www.youtube.com/watch?v=zyO-XHBzi-c
+56 minutos
