@@ -1,0 +1,83 @@
+docker container run hello-world
+
+Na versão 1.13 houve uma mudança na sintaxe dos comandos.
+Versionamento <ano>.<mes> por exemplo.: <20>.<10>
+
+Comando RUN:
+1 - docker image pull       - baixa uma imagem
+2 - docker container create - cria um container
+3 - docker container start  - inicialização do container
+4 - docker container exec   - executa um container no modo interativo (vemos a exeução logo que o comando é executado)
+
+Modo interativo:
+Fazer experimentos, testes e configurações.
+
+docker container run debian bash --version
+
+docker container ps -a
+
+docker container run --rm debian bash --version
+
+O comando RUN sempre cria um novo container quando ele é chamado.
+
+docker container run -it debian bash
+touch curso-docker.txt
+exit
+
+docker container run -it debian bash
+o arquivo não existe, ou seja, sempre que o comando RUN é executado um
+novo container é criado.
+
+Nomeando containers:
+
+docker container run --name myDeb -ti debian bash
+
+
+Reutilizando containers:
+
+docker container start -ai myDeb [ai.: attach / interactive]
+
+
+Cego, surdo e mudo, só que não!!
+Mapeamento de portas:
+
+docker container run -p <porta externa>:<porta do container> nginx
+
+docker container run -p 8080:80 nginx
+
+docker container run -p 7777:80 -v $(pwd)/not-found:/usr/share/nginx/html nginx
+**ATENÇÃO NO WINDOWS SUBSTITUIR $(pwd) POR ${pwd}
+
+docker container run -p 7777:80 -v ${pwd}/html:/usr/share/nginx/html nginx
+
+
+Modo interativo - DAEMON
+
+docker container run -d --name ex-daemon-basic -p 7878:80 -v ${pwd}/html:/usr/share/nginx/html nginx
+**DEVE-SE ESTAR NA PASTA QUE TEM ACESSO A PASTA html
+
+****************************
+* Comandos básicos:        *
+* docker container start   *
+* docker container restart *
+* docker container stop    *
+****************************
+
+****************************
+*         ALIAS            *
+* docker container ls      *
+* docker container list    *
+* docker container ps      *
+* SINTAXE ANTIGA           *
+* docker ps                *
+****************************
+
+Acessando Logs do Container:
+docker container logs <nome>
+
+
+Inspecionando o Container:
+docker container inspect <nome>
+
+Ver o tipo do sistema executado dentro do conainer
+docker container exec <nome> uname -or

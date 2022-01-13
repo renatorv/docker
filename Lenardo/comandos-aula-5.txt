@@ -1,0 +1,31 @@
+05. Deixando de ser apenas um usuário
+
+Diferença entre Imagem e Container:
+Imagem...: É o modelo do sistema de arquivos somente leitura, molde do container, equivalente a classe na OO,
+Container: É processo segregado, equivalente ao objeto.
+
+docker container --help
+docker image --help
+docker volume --help
+
+docker image pull redis:latest
+docker image inspect redis:latest
+
+Criar nova tag de uma image
+
+docker image tag redis:latest redis-renato
+
+Removendo imagens:
+docker image rm redis:latest redis-renato
+
+** BOA PRÁTICA:
+Não é bom utilizar a última versão de uma imagem.
+
+COMANDOS IMAGE:
+docker image pull
+docker image ls
+docker image rm <tag tag tag ....>
+docker image inspect < tag >
+docker image tag <image origer> <nova image>
+
+a35
