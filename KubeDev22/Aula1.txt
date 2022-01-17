@@ -1,0 +1,35 @@
+docker container run hello-world
+
+docker container run --name meuContainer hello-world
+
+docker container rm <id / nome>
+
+docker conatiner run --name meuContainer --rm hello-world
+
+************************************************************************************************************************************************************
+MODO INTERATIVO
+
+docker container run -ti ubuntu /bin/bash
+    apt update
+    apt install curl
+    curl https://www.google.com
+
+************************************************************************************************************************************************************
+EXECUTANDO CONTINUAMENTE
+
+docker container run nginx
+
+docker container run -d nginx
+
+[ Port Bind ]
+docker container run -d -p local:container nginx
+docker container run -d -p 8080:80 nginx
+
+docker container rm -f < id >
+
+
+************************************************************************************************************************************************************
+MongoDb em container
+
+https://www.youtube.com/watch?v=lKxuO--0ypM
+54 minutos
