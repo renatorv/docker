@@ -31,5 +31,48 @@ docker container rm -f < id >
 ************************************************************************************************************************************************************
 MongoDb em container
 
-https://www.youtube.com/watch?v=lKxuO--0ypM
-54 minutos
+docker container run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
+
+docker container rm -f <cf9aa21b0a34>
+
+
+************************************************************************************************************************************************************
+Comandos de Troubleshooting [ Resolução de Problemas ]
+
+docker container inspect <id>
+
+docker container exec -ti <id> /bin/bash [ acessar o terminal de um container em execução ]
+
+docker container stop <id>
+docker container start <id>
+docker container rm -f <id>
+
+docker container logs <id>
+docker container logs -n 5 <id> [ -n 5 => últimas 5 linhas do log]
+docker container logs -f <id> [ -f (follow) fica verificando continuamente ]
+docker container logs -t <id> [ -t (time) mostra data e hora ]
+
+
+************************************************************************************************************************************************************
+Introdução a Imagens Docker
+
+Imagem.: template para se criar um conatiner. A imagem é criada em camadas, utiliza a tecnologia Overlay File System do Linux, que são uma combinação de
+camadas de file system de somente leitura, onde é inserida uma combinação de várias camadas e o resultado é uma IMAGEM DOCKER.
+
+Assim o container é uma inserção em cima da IMAGEM de UMA CAMADA DE LEITURA E ESCRITA.
+
+
+************************************************************************************************************************************************************
+Como construir sua imagem Docker? 1h e 14min
+
+1) Docker Commit:
+
+2) Dockerfile: 
+
+
+
+
+
+************************************************************************************************************************************************************
+
+
