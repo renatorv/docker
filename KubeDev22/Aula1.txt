@@ -65,7 +65,18 @@ Assim o container é uma inserção em cima da IMAGEM de UMA CAMADA DE LEITURA E
 ************************************************************************************************************************************************************
 Como construir sua imagem Docker? 1h e 14min
 
-1) Docker Commit: não é uma boa prática!! 
+1) Docker Commit: não é uma boa prática!!
+Exemplo:
+docker container run -it ubuntu /bin/bash
+apt-get update
+apt-get install curl --yes
+sair => pegar id da imagem
+docker commit  < id > < novo nome > [ docker commit 9ba2b3a7e67a ubuntu-curl-commit ]
+docker images ls
+UTILIZANDO:
+docker container run -it ubuntu-curl-commit /bin/bash
+docker container run -it ubuntu-curl-commit curl https://www.google.com
+PROCESSO É TODO MANUAL!!
 
 2) Dockerfile: 
 
