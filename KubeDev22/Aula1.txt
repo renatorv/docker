@@ -78,12 +78,28 @@ docker container run -it ubuntu-curl-commit /bin/bash
 docker container run -it ubuntu-curl-commit curl https://www.google.com
 PROCESSO É TODO MANUAL!!
 
-2) Dockerfile: 
+2) Dockerfile: exemplo na pasta. 
+INSTRUÇÕES DO DOCKERFILE:
+FROM => determina a partir de qual imagem será criada a imagem docker
+RUN => executa um comando dentro do conatiner
 
+[
+    FROM ubuntu
+    RUN apt-get update 
+    RUN apt-get install curl --yes
+]
+esse método pode gerar problemas de cache, para resolver:
+[
+    FROM ubuntu
+    RUN apt-get update && apt-get install curl --yes && apt-get install vim --yes
+]
 
+docker image build -t < nome > contexto [contexto: local do arquivo Dockerfile]
+docker image build -t ubuntu-curl-file .
 
+docker image prune 
+[ Remove imagens sem referência ]
 
+docker image rmi -f < id >
 
 ************************************************************************************************************************************************************
-
-
