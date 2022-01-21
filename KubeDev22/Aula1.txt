@@ -65,7 +65,7 @@ Assim o container é uma inserção em cima da IMAGEM de UMA CAMADA DE LEITURA E
 ************************************************************************************************************************************************************
 Como construir sua imagem Docker? 1h e 14min
 
-1) Docker Commit:
+1) Docker Commit: não é uma boa prática!! 
 
 2) Dockerfile: 
 
